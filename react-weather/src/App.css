@@ -18,7 +18,8 @@ img{
 }
 
 .current-weather_condition{
-  color: pink
+  color: pink;
+  text-align: center;
 }
 
 .current-weather_temp{
@@ -26,4 +27,30 @@ img{
   color: red;
   margin: 0 auto;
   padding: 10px;
+}
+
+.current-weather_feeling{
+  text-align: center;
+}
+
+.forecast{
+  display: flex;
+}
+
+.weather-forecast{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+}
+
+.weather-forecast_day{
+
+}
+
+.weather-forecast_temp{
+  font-size: 24px;
 }
