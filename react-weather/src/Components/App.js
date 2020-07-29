@@ -1,8 +1,11 @@
 import React, { useEffect, useReducer } from "react";
 import Weather from './Weather'
+import '../../src/App.css'
 
 const weatherUrl =
-  "http://api.weatherapi.com/v1/current.json?key=ce12d95b27ae402395370111202907&q=London";
+  // "http://api.weatherapi.com/v1/current.json?key=ce12d95b27ae402395370111202907&q=London";
+  "http://api.weatherapi.com/v1/forecast.json?key=ce12d95b27ae402395370111202907&q=London&days=3";
+
 
   const initialState = {
     loading: true,
@@ -24,7 +27,7 @@ const weatherUrl =
         ...state,
         loading: false,
         location: action.payload,
-        currentWeather: action.weather,
+        currentWeather: action.currentWeather
 
       }
       case 'forecast_failed':
@@ -49,17 +52,19 @@ const weatherUrl =
               dispatch({
                 type:'forecast_success',
                 payload: jsonResponse.location,
-                weather: jsonResponse.current
+                currentWeather: jsonResponse.current
               })
             // console.log('current',jsonResponse.current);
             // console.log('location',jsonResponse.location);
 
+            console.log('generic',jsonResponse)
           })
       }, [])
 
       const { location, errorMessage, loading, currentWeather } = state;
-      console.log('location',location)
-      console.log('current',currentWeather)
+      // console.log('location',location)
+      // console.log('current',currentWeather)
+
 
       return (
         <div className="App">
