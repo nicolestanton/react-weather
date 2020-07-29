@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "./logo.svg";
 import Test from "./Components/Test";
 import "./App.css";
 
+const weatherUrl =
+  "http://api.weatherapi.com/v1/current.json?key=ce12d95b27ae402395370111202907&q=London";
+
 function App() {
+  useEffect(() => {
+    fetch(weatherUrl)
+      .then((response) => response.json())
+      .then((jsonResponse) => {
+        console.log(jsonResponse);
+      });
+  }, []);
+  console.log(weatherUrl);
   return (
     <div className="App">
       <Test />
