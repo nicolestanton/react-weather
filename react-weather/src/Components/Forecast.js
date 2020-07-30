@@ -15,6 +15,13 @@ export function Forecast({ forecast }) {
         <span className="weather-forecast_temp">
           {forecast.day.avgtemp_c}°C
         </span>
+        <img
+          src={forecast.day.condition.icon}
+          alt={forecast.day.condition.text}
+        />
+        <span className="weather-forecast_desc">
+          {forecast.day.condition.text}
+        </span>
       </div>
     </React.Fragment>
   );

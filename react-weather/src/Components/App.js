@@ -65,6 +65,7 @@ function App() {
   return (
     <div className="App">
       <Weather location={location} currentWeather={currentWeather} />
+      <h2>Here's your 3 day forecast:</h2>
       <div className="forecast">
         {loading && !errorMessage ? (
           <span>loading...</span>
