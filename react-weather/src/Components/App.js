@@ -1,18 +1,18 @@
 import React, { useEffect, useReducer } from "react";
-import Weather from "./Weather";
+import CurrentWeather from "./CurrentWeather";
 import Forecast from "./Forecast";
 
-import "../../src/App.css";
+import "../../src/Styles/App.scss";
 
 const weatherUrl =
-  "http://api.weatherapi.com/v1/forecast.json?key=ce12d95b27ae402395370111202907&q=London&days=3";
+  "http://api.weatherapi.com/v1/forecast.json?key=ce12d95b27ae402395370111202907&q=London&days=7&forecastday=astro";
 
 const initialState = {
   loading: true,
   location: [],
   currentWeather: [],
   errorMessage: null,
-  forecast: [],
+  forecast: []
 };
 
 const reducer = (state, action) => {
@@ -21,7 +21,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         loading: true,
-        errorMessage: null,
+        errorMessage: null
       };
     case "forecast_success":
       return {
@@ -29,13 +29,13 @@ const reducer = (state, action) => {
         loading: false,
         location: action.payload,
         currentWeather: action.currentWeather,
-        forecast: action.forecast.forecastday,
+        forecast: action.forecast.forecastday
       };
     case "forecast_failed":
       return {
         ...state,
         loading: false,
-        errorMessage: action.error,
+        errorMessage: action.error
       };
     default:
       return state;
@@ -47,13 +47,13 @@ function App() {
 
   useEffect(() => {
     fetch(weatherUrl)
-      .then((response) => response.json())
-      .then((jsonResponse) => {
+      .then(response => response.json())
+      .then(jsonResponse => {
         dispatch({
           type: "forecast_success",
           payload: jsonResponse.location,
           currentWeather: jsonResponse.current,
-          forecast: jsonResponse.forecast,
+          forecast: jsonResponse.forecast
         });
 
         console.log("generic", jsonResponse);
@@ -64,9 +64,13 @@ function App() {
 
   return (
     <div className="App">
-      <Weather location={location} currentWeather={currentWeather} />
-      <h2>Here's your 3 day forecast:</h2>
+      <CurrentWeather
+        location={location}
+        currentWeather={currentWeather}
+        forecast={forecast}
+      />
       <div className="forecast">
+        <h2>This Week</h2>
         {loading && !errorMessage ? (
           <span>loading...</span>
         ) : errorMessage ? (
